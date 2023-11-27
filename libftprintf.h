@@ -15,5 +15,7 @@ typedef struct s_flags {
 	int	plus;
 }	t_flags;
 
-int	ft_printf(const char *format, ...);
+int			ft_printf(const char *format, ...);
+static	int	in_set(char c, const char *set);
+
 #endif
