@@ -10,32 +10,34 @@ LIBFT_DIR = libft/
 
 SRCS := ft_printf.c
 BONUSSRCS := .
-INC := libft.a
+LIBFT := $(LIBFT_DIR)/libft.a
 
 BONUSOBJS := $(BONUSSRCS:.c=.o)
 OBJS := $(SRCS:.c=.o)
 
-$(NAME) : $(OBJS)
+$(NAME) : $(LIBFT) $(OBJS)
 	ar rcs $(NAME) $(OBJS)
 
 %.o:%.c
 	cc $(CFLAGS) -c $< -o $@
 
-all: $(INC) $(NAME)	
+all: $(NAME)	
 
-libft :
-	make -C libft
+$(LIBFT):
+	make -C $(LIBFT_DIR) all
+
 clean:
-	make clean -C libft
+	make -C $(LIBFT_DIR) clean
 	rm -f $(OBJS) $(BONUSOBJS) .bonus
 
 fclean: clean 
+	make -C $(LIBFT_DIR) fclean
 	rm -f $(NAME) lib
 	
 
 re: fclean all
 
-bonus : .bonus
+bonus : all
 
 .bonus: $(OBJS) $(BONUSOBJS)
 	ar rcs $(NAME) $?
