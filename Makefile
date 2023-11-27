@@ -8,8 +8,9 @@ OBJ_DIR = .
 BONUS_DIR = .
 LIBFT_DIR = libft/
 
-SRCS := 
-BONUSSRCS := 
+SRCS := ft_printf.c
+BONUSSRCS := .
+INC := libft.a
 
 BONUSOBJS := $(BONUSSRCS:.c=.o)
 OBJS := $(SRCS:.c=.o)
@@ -20,14 +21,17 @@ $(NAME) : $(OBJS)
 %.o:%.c
 	cc $(CFLAGS) -c $< -o $@
 
-all: $(NAME)
+all: $(INC) $(NAME)	
 
-
+libft :
+	make -C libft
 clean:
+	make clean -C libft
 	rm -f $(OBJS) $(BONUSOBJS) .bonus
 
 fclean: clean 
-	rm -f $(NAME)
+	rm -f $(NAME) lib
+	
 
 re: fclean all
 
@@ -37,4 +41,4 @@ bonus : .bonus
 	ar rcs $(NAME) $?
 	touch .bonus
 
-.PHONY : all clean fclean re bonus
+.PHONY : all clean fclean re bonus libft
