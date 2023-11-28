@@ -6,11 +6,11 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 11:15:57 by xriera-c          #+#    #+#             */
-/*   Updated: 2023/11/28 11:20:19 by xriera-c         ###   ########.fr       */
+/*   Updated: 2023/11/28 17:27:43 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 char	*ft_utoa(unsigned int n)
 {
@@ -19,7 +19,7 @@ char	*ft_utoa(unsigned int n)
 
 	i = 0;
 	if (n == 0)
-		return (ft_strdup(""));
+		return (ft_strdup("0"));
 	str = malloc(15);
 	if (!str)
 		return (NULL);

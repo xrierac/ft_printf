@@ -12,24 +12,26 @@ LIBFT := $(LIBFT_DIR)/libft.a
 
 OBJS := $(SRCS:.c=.o)
 
-$(NAME) : $(OBJS)
+$(NAME) : $(LIBFT) $(OBJS)
 	ar rcs $(NAME) $(OBJS)
 
 $(LIBFT) :
 	make -C $(LIBFT_DIR)
+	cp $(LIBFT) .
+	mv libft.a $(NAME)
 
 %.o:%.c
-	cc $(CFLAGS) -c $< -o $@
+	cc $(CFLAGS) -c $< -o $@ 
 
 all: $(NAME)	
 
 clean:
 	make -C $(LIBFT_DIR) clean
-	rm -f $(OBJS) $(BONUSOBJS) .bonus
+	rm -f $(OBJS)
 
 fclean: clean 
-	make -C $(LIBFT_DIR) fclean
-	rm -f $(NAME) libft
+	rm -f $(LIBFT)
+	rm -f $(NAME)
 	
 
 re: fclean all

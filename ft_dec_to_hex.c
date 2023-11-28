@@ -6,11 +6,11 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 10:09:33 by xriera-c          #+#    #+#             */
-/*   Updated: 2023/11/28 11:10:32 by xriera-c         ###   ########.fr       */
+/*   Updated: 2023/11/28 17:53:17 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 char	*ft_dec_to_hex(unsigned int n, char *base)
 {
@@ -21,6 +21,12 @@ char	*ft_dec_to_hex(unsigned int n, char *base)
 	hex = malloc(20);
 	if (hex == NULL)
 		return (NULL);
+	if (n == 0)
+	{
+		hex[0] = '0';
+		hex[1] = '\0';
+		return (hex);
+	}
 	i = 0;
 	while (n != 0)
 	{

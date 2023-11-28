@@ -6,11 +6,12 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:18:59 by xriera-c          #+#    #+#             */
-/*   Updated: 2023/11/28 15:13:25 by xriera-c         ###   ########.fr       */
+/*   Updated: 2023/11/28 17:53:21 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
+#include <stdio.h>
 
 char	*ft_char_to_str(char c)
 {
@@ -26,8 +27,9 @@ char	*ft_char_to_str(char c)
 
 static int	putchr(char c)
 {
-	static int	i = 0;
+	int	i;
 
+	i = 0;
 	i += write(1, &c, 1);
 	return (i);
 }
@@ -62,20 +64,21 @@ int	print_chrs(const char *format, va_list ap, int len)
 	char	*buffer;
 
 	size = 0;
-	i = 0;
 	while (format[++len])
 	{
 		if (format[len] == '%' && format[len + 1] != '\0')
 		{
+			i = 0;
 			buffer = get_conversion(format[++len], ap);
 			if (buffer == NULL)
-				return (-1);
-			while (buffer[i])
-				size = putchr(buffer[i++]);
+				size += write(1, "(null)", 6);
+			else
+				while (buffer[i])
+					size += putchr(buffer[i++]);
 			free(buffer);
 		}
 		else
-			size = putchr(format[len]);
+			size += putchr(format[len]);
 		if (size == -1)
 			break ;
 	}
@@ -90,7 +93,7 @@ int	ft_printf(const char *format, ...)
 
 	len = -1;
 	va_start(ap, format);
-	if (!format || !*format)
+	if (!format)
 		return (-1);
 	bytes = print_chrs(format, ap, len);
 	va_end(ap);
