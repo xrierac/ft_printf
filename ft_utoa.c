@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   ft_utoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/04 11:25:11 by xriera-c          #+#    #+#             */
-/*   Updated: 2023/11/04 13:21:07 by xriera-c         ###   ########.fr       */
+/*   Created: 2023/11/28 11:15:57 by xriera-c          #+#    #+#             */
+/*   Updated: 2023/11/28 11:20:19 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libftprintf.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+char	*ft_utoa(unsigned int n)
 {
-	t_list	*node;
+	char	*str;
+	size_t	i;
 
-	if (*lst)
+	i = 0;
+	if (n == 0)
+		return (ft_strdup(""));
+	str = malloc(15);
+	if (!str)
+		return (NULL);
+	while (n != 0)
 	{
-		node = ft_lstlast(*lst);
-		node->next = new;
+		str[i++] = (n % 10) + '0';
+		n = n / 10;
 	}
-	else
-		*lst = new;
+	str[i] = '\0';
+	return (ft_strrev(str));
 }

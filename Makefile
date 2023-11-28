@@ -5,26 +5,23 @@ CFLAGS = -Wall -Wextra -Werror
 
 SRC_DIR = .
 OBJ_DIR = .
-BONUS_DIR = .
 LIBFT_DIR = libft/
 
-SRCS := ft_printf.c
-BONUSSRCS := .
+SRCS := ft_printf.c ft_utoa.c ft_dec_to_hex.c ft_dec_to_xhex.c
 LIBFT := $(LIBFT_DIR)/libft.a
 
-BONUSOBJS := $(BONUSSRCS:.c=.o)
 OBJS := $(SRCS:.c=.o)
 
-$(NAME) : $(LIBFT) $(OBJS)
+$(NAME) : $(OBJS)
 	ar rcs $(NAME) $(OBJS)
+
+$(LIBFT) :
+	make -C $(LIBFT_DIR)
 
 %.o:%.c
 	cc $(CFLAGS) -c $< -o $@
 
 all: $(NAME)	
-
-$(LIBFT):
-	make -C $(LIBFT_DIR) all
 
 clean:
 	make -C $(LIBFT_DIR) clean
@@ -32,15 +29,9 @@ clean:
 
 fclean: clean 
 	make -C $(LIBFT_DIR) fclean
-	rm -f $(NAME) lib
+	rm -f $(NAME) libft
 	
 
 re: fclean all
 
-bonus : all
-
-.bonus: $(OBJS) $(BONUSOBJS)
-	ar rcs $(NAME) $?
-	touch .bonus
-
-.PHONY : all clean fclean re bonus libft
+.PHONY : all clean fclean re libft

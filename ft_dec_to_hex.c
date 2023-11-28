@@ -6,9 +6,11 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 10:09:33 by xriera-c          #+#    #+#             */
-/*   Updated: 2023/11/28 10:34:29 by xriera-c         ###   ########.fr       */
+/*   Updated: 2023/11/28 11:10:32 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libftprintf.h"
 
 char	*ft_dec_to_hex(unsigned int n, char *base)
 {
