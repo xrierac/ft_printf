@@ -11,9 +11,8 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
-char	*ft_char_to_str(char c)
+char	*ft_char_to_str(int c)
 {
 	char	*s;
 
