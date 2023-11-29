@@ -6,7 +6,7 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:18:59 by xriera-c          #+#    #+#             */
-/*   Updated: 2023/11/29 14:41:00 by xriera-c         ###   ########.fr       */
+/*   Updated: 2023/11/29 14:43:50 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ static int	ft_putchar(int c)
 
 char	*get_conversion(char c, va_list ap)
 {
-	if (c == 's')
-		return (ft_strdup(va_arg(ap, const char *)));
 	if (c == 'p')
 		return (ft_dec_to_xhex(va_arg(ap, unsigned long), "0123456789abcdef"));
 	if (c == 'd')
