@@ -6,7 +6,7 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:06:23 by xriera-c          #+#    #+#             */
-/*   Updated: 2023/11/28 17:46:30 by xriera-c         ###   ########.fr       */
+/*   Updated: 2023/11/29 11:29:32 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@
 
 int		ft_printf(const char *format, ...);
 char	*ft_dec_to_hex(unsigned int n, char *base);
-char	*ft_dec_to_xhex(unsigned int n, char *base);
+char	*ft_dec_to_xhex(unsigned long n, char *base);
 char	*ft_utoa(unsigned int n);
 #endif
