@@ -6,7 +6,7 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 10:09:33 by xriera-c          #+#    #+#             */
-/*   Updated: 2023/11/29 11:07:52 by xriera-c         ###   ########.fr       */
+/*   Updated: 2023/11/29 15:04:56 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_dec_to_xhex(unsigned long n, char *base)
 	char	coded;
 	int		i;
 
-	hex = malloc(20);
+	hex = malloc(25);
 	if (hex == NULL)
 		return (NULL);
 	i = 0;
