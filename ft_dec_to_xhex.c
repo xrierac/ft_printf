@@ -6,13 +6,13 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 10:09:33 by xriera-c          #+#    #+#             */
-/*   Updated: 2023/11/28 17:50:44 by xriera-c         ###   ########.fr       */
+/*   Updated: 2023/11/29 11:07:52 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_dec_to_xhex(unsigned int n, char *base)
+char	*ft_dec_to_xhex(unsigned long n, char *base)
 {
 	char	*hex;
 	char	coded;
