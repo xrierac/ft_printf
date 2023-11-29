@@ -6,7 +6,7 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:18:59 by xriera-c          #+#    #+#             */
-/*   Updated: 2023/11/29 12:24:48 by xriera-c         ###   ########.fr       */
+/*   Updated: 2023/11/29 14:41:00 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	ft_putchar(int c)
 char	*get_conversion(char c, va_list ap)
 {
 	if (c == 's')
-		return (ft_strdup(va_arg(ap, char *)));
+		return (ft_strdup(va_arg(ap, const char *)));
 	if (c == 'p')
 		return (ft_dec_to_xhex(va_arg(ap, unsigned long), "0123456789abcdef"));
 	if (c == 'd')
@@ -41,19 +41,21 @@ char	*get_conversion(char c, va_list ap)
 int	print_buffer(const char *format, va_list ap, int len)
 {
 	int		size;
-	int		i;
 	char	*buffer;
 
-	size = 0;
-	i = 0;
-	buffer = get_conversion(format[len + 1], ap);
-	if (buffer == NULL)
+	if (format[len + 1] == 's')
 	{
-		size += write(1, "(null)", 6);
-			return (-1);
+		buffer = va_arg(ap, char *);
+		if (buffer == NULL)
+			return (write(1, "(null)", 6));
+		return (write(1, &buffer[0], ft_strlen(buffer)));
 	}
 	else
-		size += write(1, &buffer[i++], ft_strlen(buffer));
+		buffer = get_conversion(format[len + 1], ap);
+	if (buffer == NULL)
+		return (-1);
+	else
+		size = write(1, &buffer[0], ft_strlen(buffer));
 	free(buffer);
 	return (size);
 }
