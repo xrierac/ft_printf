@@ -6,41 +6,23 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:18:59 by xriera-c          #+#    #+#             */
-/*   Updated: 2023/11/28 17:53:21 by xriera-c         ###   ########.fr       */
+/*   Updated: 2023/11/29 12:24:48 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_char_to_str(int c)
+static int	ft_putchar(int c)
 {
-	char	*s;
-
-	s = malloc(2);
-	if (s == NULL)
-		return (NULL);
-	s[0] = c;
-	s[1] = '\0';
-	return (s);
-}
-
-static int	putchr(char c)
-{
-	int	i;
-
-	i = 0;
-	i += write(1, &c, 1);
-	return (i);
+	return (write(1, &c, 1));
 }
 
 char	*get_conversion(char c, va_list ap)
 {
-	if (c == 'c')
-		return (ft_char_to_str(va_arg(ap, int)));
 	if (c == 's')
 		return (ft_strdup(va_arg(ap, char *)));
 	if (c == 'p')
-		return (ft_dec_to_xhex(va_arg(ap, unsigned int), "0123456789abcdef"));
+		return (ft_dec_to_xhex(va_arg(ap, unsigned long), "0123456789abcdef"));
 	if (c == 'd')
 		return (ft_itoa(va_arg(ap, int)));
 	if (c == 'i')
@@ -56,30 +38,49 @@ char	*get_conversion(char c, va_list ap)
 	return (NULL);
 }
 
-int	print_chrs(const char *format, va_list ap, int len)
+int	print_buffer(const char *format, va_list ap, int len)
 {
 	int		size;
 	int		i;
 	char	*buffer;
 
 	size = 0;
+	i = 0;
+	buffer = get_conversion(format[len + 1], ap);
+	if (buffer == NULL)
+	{
+		size += write(1, "(null)", 6);
+			return (-1);
+	}
+	else
+		size += write(1, &buffer[i++], ft_strlen(buffer));
+	free(buffer);
+	return (size);
+}
+
+int	print_chrs(const char *format, va_list ap, int len)
+{
+	int		size;
+	int		check;
+
+	size = 0;
 	while (format[++len])
 	{
-		if (format[len] == '%' && format[len + 1] != '\0')
+		if (format[len] == '%' && format[len + 1] == 'c')
 		{
-			i = 0;
-			buffer = get_conversion(format[++len], ap);
-			if (buffer == NULL)
-				size += write(1, "(null)", 6);
-			else
-				while (buffer[i])
-					size += putchr(buffer[i++]);
-			free(buffer);
+			check = ft_putchar(va_arg(ap, int));
+			len++;
+		}
+		else if (format[len] == '%' && format[len + 1] != '\0')
+		{
+			check = print_buffer(format, ap, len);
+			len++;
 		}
 		else
-			size += putchr(format[len]);
-		if (size == -1)
-			break ;
+			check = write(1, &format[len], 1);
+		if (check == -1)
+			return (-1);
+		size += check;
 	}
 	return (size);
 }
@@ -91,9 +92,9 @@ int	ft_printf(const char *format, ...)
 	int				bytes;
 
 	len = -1;
-	va_start(ap, format);
 	if (!format)
 		return (-1);
+	va_start(ap, format);
 	bytes = print_chrs(format, ap, len);
 	va_end(ap);
 	return (bytes);
