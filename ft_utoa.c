@@ -6,11 +6,11 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 11:15:57 by xriera-c          #+#    #+#             */
-/*   Updated: 2023/11/28 17:27:43 by xriera-c         ###   ########.fr       */
+/*   Updated: 2023/11/30 10:37:49 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft/libft.h"
 
 char	*ft_utoa(unsigned int n)
 {
