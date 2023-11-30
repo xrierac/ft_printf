@@ -6,11 +6,12 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:18:59 by xriera-c          #+#    #+#             */
-/*   Updated: 2023/11/29 14:43:50 by xriera-c         ###   ########.fr       */
+/*   Updated: 2023/11/30 10:38:39 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include "libft/libft.h"
 
 static int	ft_putchar(int c)
 {
@@ -66,17 +67,18 @@ int	print_chrs(const char *format, va_list ap, int len)
 	size = 0;
 	while (format[++len])
 	{
+		check = 0;
 		if (format[len] == '%' && format[len + 1] == 'c')
 		{
 			check = ft_putchar(va_arg(ap, int));
 			len++;
 		}
-		else if (format[len] == '%' && format[len + 1] != '\0')
+		else if (format[len] == '%' && in_set(format[len + 1], "spdiuxX%"))
 		{
 			check = print_buffer(format, ap, len);
 			len++;
 		}
-		else
+		else if (format[len] != '%')
 			check = write(1, &format[len], 1);
 		if (check == -1)
 			return (-1);
