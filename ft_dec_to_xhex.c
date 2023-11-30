@@ -6,11 +6,11 @@
 /*   By: xriera-c <xriera-c@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 10:09:33 by xriera-c          #+#    #+#             */
-/*   Updated: 2023/11/29 15:04:56 by xriera-c         ###   ########.fr       */
+/*   Updated: 2023/11/30 10:37:17 by xriera-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft/libft.h"
 
 char	*ft_dec_to_xhex(unsigned long n, char *base)
 {
