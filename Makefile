@@ -7,7 +7,7 @@ SRC_DIR = .
 OBJ_DIR = .
 LIBFT_DIR = libft/
 
-SRCS := ft_printf.c ft_utoa.c ft_dec_to_hex.c ft_dec_to_xhex.c
+SRCS := ft_printf.c ft_utoa.c ft_dec_to_hex.c ft_dec_to_xhex.c ft_printf_utils.c
 LIBFT := $(LIBFT_DIR)/libft.a
 
 OBJS := $(SRCS:.c=.o)
