@@ -73,7 +73,7 @@ int	print_chrs(const char *format, va_list ap, int len)
 			check = ft_putchar(va_arg(ap, int));
 			len++;
 		}
-		else if (format[len] == '%' && in_set(format[len + 1], "spdiuxX%"))
+		else if (format[len] == '%' && ft_inset(format[len + 1], "spdiuxX%"))
 		{
 			check = print_buffer(format, ap, len);
 			len++;
